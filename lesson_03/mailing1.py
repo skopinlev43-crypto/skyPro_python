@@ -1,4 +1,4 @@
-from adress import Address
+from address import Address
 
 class Mailing:
     def __init__(self, to_address: Address, from_address: Address, cost: int | float, track: str):

@@ -1,5 +1,5 @@
-from adress import Address
-from mailing import Mailing
+from address import Address
+from mailing1 import Mailing
 
 from_adr = Address("610035", "г.Киров", "ул.Сурикова", "д.4", "кв.5")
 to_adr = Address("610000", "г.Санкт-Петербург", "Невский проспект", "д.25", "кв.18")

@@ -11,4 +11,3 @@ class User:
 
     def sayFull_name(self):
         print(f"{self.first_name} {self.last_name}")
-
