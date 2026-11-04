@@ -1,9 +1,13 @@
-from time import sleep
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_session_storage_auth():
     driver = webdriver.Chrome()
+    # Инициализируем явное ожидание (таймаут 10 секунд)
+    wait = WebDriverWait(driver, 10)
+
     # 1. Открываем главную страницу для инициализации домена
     driver.get("https://gitflic.ru")
     
@@ -11,7 +15,7 @@ def test_session_storage_auth():
     user1_cookie = {
         'name': 'SESSION', 
         'value': 'ZWMzNmQ5MTYtZTQwNy00MjIzLTg3YzMtYjBhOWJhNDJlOWE0'
-        }
+    }
     driver.add_cookie(user1_cookie)
     
     # 3. Обновляем страницу для применения cookie
@@ -20,7 +24,8 @@ def test_session_storage_auth():
     # 4. Переходим на страницу профиля пользователя 1
     driver.get("https://gitflic.ru/user/test_lev_1") 
 
-    sleep(5)
+    # Ожидаем, пока URL не станет содержать юзернейм первого пользователя
+    wait.until(EC.url_contains("test_lev_1"))
     
     # 5. Сохраняем текущий URL первого пользователя
     url_user_1 = driver.current_url
@@ -32,7 +37,7 @@ def test_session_storage_auth():
     user2_cookie = {
         'name': 'SESSION', 
         'value': 'YWY4ZTljNDItMzZjMi00YjUwLWI2M2ItYWNjNWMyNjk2ZWM1'
-        }
+    }
     driver.add_cookie(user2_cookie)
     
     # 8. Обновляем страницу
@@ -41,7 +46,8 @@ def test_session_storage_auth():
     # 9. Переходим на страницу профиля пользователя 2
     driver.get("https://gitflic.ru/user/test_lev_2")
 
-    sleep(5)
+    # Ожидаем, пока URL не станет содержать юзернейм второго пользователя
+    wait.until(EC.url_contains("test_lev_2"))
     
     # 10. Сохраняем текущий URL второго пользователя
     url_user_2 = driver.current_url
